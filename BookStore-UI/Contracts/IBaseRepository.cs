@@ -15,6 +15,6 @@ namespace BookStore_UI.Contracts
 
         Task<bool> Update(string url, T obj);
 
-        Task<T> Delete(string url, int id);
+        Task<bool> Delete(string url, int id);
     }
 }
