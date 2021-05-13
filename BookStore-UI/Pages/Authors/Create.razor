@@ -1,9 +1,9 @@
 ﻿@page "/authors/create/"
-
+@attribute [Authorize(Roles = "Administrator")]
 @inject NavigationManager _navManager
 @inject IAuthorRepository _authRepo
 
-<h3>Create New Author</h3>
+<h3 class="card-title">Create New Author</h3>
 @if (!isSuccess)
 {
     <ErrorMessage Message="Something went wrong with the operation" />
@@ -37,8 +37,8 @@
     private async Task CreateAuthor()
     {
         isSuccess = await _authRepo.Create(Endpoints.AuthorsEndpoint, Model);
-        
-        if(isSuccess)
+
+        if (isSuccess)
         {
             BackToList();
         }
