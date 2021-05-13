@@ -100,13 +100,13 @@ namespace BookStore_UI.Service
             return null;
         }
 
-        public async Task<bool> Update(string url, T obj)
+        public async Task<bool> Update(string url, T obj,int id)
         {
             if(obj == null)
             {
                 return false;
             }
-            var request = new HttpRequestMessage(HttpMethod.Put,url);
+            var request = new HttpRequestMessage(HttpMethod.Put,url + id);
 
             request.Content = new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json");
 

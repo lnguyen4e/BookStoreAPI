@@ -8,11 +8,9 @@
         <h3 class="card-title">Register Now</h3>
         @if (isFailed)
         {
-            <div class="alert alert-danger">
-                <p>Something went wrong with the registration attempt</p>
-            </div>
+           <ErrorMessage Message="Something went wrong with this operation"/>
         }
-        <div class="card-body">
+        
             <EditForm Model="Model" OnValidSubmit="HandleRegistration">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
@@ -34,7 +32,7 @@
                 <button class="btn btn-primary btn-block">Submit</button>
             </EditForm>
         </div>
-    </div>
+   
 
 
 @code {
