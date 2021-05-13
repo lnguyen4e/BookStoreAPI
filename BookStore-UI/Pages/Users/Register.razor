@@ -45,7 +45,7 @@
         var response = await _authRepo.Register(Model);
         if (response)
         {
-            _navMan.NavigateTo("/");
+            _navMan.NavigateTo("/login");
         }
         else
         {

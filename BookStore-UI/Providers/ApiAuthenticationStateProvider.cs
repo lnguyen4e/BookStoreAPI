@@ -51,7 +51,29 @@ namespace BookStore_UI.Providers
                 return new AuthenticationState(new System.Security.Claims.ClaimsPrincipal(new ClaimsIdentity()));
             }
         }
+        public async Task LoggedIn()
+        {
+            var savedToken = await _localStorage.GetItemAsync<string>("authToken");
 
+            var tokenContent = _tokenHandler.ReadJwtToken(savedToken);
+
+            var claims = ParseClaim(tokenContent);
+
+            var user = new ClaimsPrincipal(new ClaimsIdentity(claims, "jwt"));
+
+            var authState = Task.FromResult(new AuthenticationState(user));
+
+            NotifyAuthenticationStateChanged(authState);
+        }
+
+        public void LoggedOut()
+        {
+            var nobody = new ClaimsPrincipal(new ClaimsIdentity());
+
+            var authState = Task.FromResult(new AuthenticationState(nobody));
+
+            NotifyAuthenticationStateChanged(authState); 
+        }
         private IList<Claim> ParseClaim(JwtSecurityToken tokenContent)
         {
             var claims = tokenContent.Claims.ToList();
